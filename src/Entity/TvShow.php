@@ -40,7 +40,7 @@ class TvShow
     private $nbLikes;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime_immutable")
      */
     private $publishedAt;
 
@@ -59,9 +59,21 @@ class TvShow
      */
     private $Season;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="tvShows")
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Character::class, inversedBy="tvShows")
+     */
+    private $persona;
+
     public function __construct()
     {
         $this->Season = new ArrayCollection();
+        $this->category = new ArrayCollection();
+        $this->persona = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,6 +191,54 @@ class TvShow
                 $season->setTvShow(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Character[]
+     */
+    public function getPersona(): Collection
+    {
+        return $this->persona;
+    }
+
+    public function addPersona(Character $persona): self
+    {
+        if (!$this->persona->contains($persona)) {
+            $this->persona[] = $persona;
+        }
+
+        return $this;
+    }
+
+    public function removePersona(Character $persona): self
+    {
+        $this->persona->removeElement($persona);
 
         return $this;
     }

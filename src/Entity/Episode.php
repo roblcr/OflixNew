@@ -28,17 +28,17 @@ class Episode
     private $title;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime_immutable")
      */
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime_immutable")
      */
     private $updatedAt;
 
