@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TvShow{% endblock %}
+{% block title %}{{ tv_show.title }} | {{ parent() }} {% endblock %}
 
 {% block body %}
     <h1>TvShow</h1>
@@ -42,9 +42,36 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tv_show_index') }}">back to list</a>
+    <a href="{{ path('tv_show_list') }}">back to list</a>
 
     <a href="{{ path('tv_show_edit', {'id': tv_show.id}) }}">edit</a>
 
     {{ include('tv_show/_delete_form.html.twig') }}
+
+    <main>
+
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">{{tv_show.title}}</h1>
+                    <img src="https://m.media-amazon.com/images/M/MV5BMWI0OTJlYTItNzMwZi00YzRiLWJhMjItMWRlMDNhZjNiMzJkXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg" alt="" height="400">
+                    <p class="lead text-muted">
+                        <a href="#"><span class="badge bg-secondary"></span></a>
+					</p>
+                    <p class="lead text-muted">
+					
+                        Avec : <a href="#"></a>
+                   
+					</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="py-5 bg-light">
+            <div class="container">
+                <p>
+                    {{ tv_show.synospis }}
+                </p>
+            </div>
+        </div>
 {% endblock %}

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TvShowController extends AbstractController
 {
     /**
-     * @Route("/", name="tv_show_index", methods={"GET"})
+     * @Route("/", name="tv_show_list", methods={"GET"})
      */
     public function index(TvShowRepository $tvShowRepository): Response
     {
