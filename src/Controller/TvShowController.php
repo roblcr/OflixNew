@@ -49,13 +49,22 @@ class TvShowController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tv_show_show", methods={"GET"})
+     * @Route("/{id}", name="tv_show_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(TvShow $tvShow): Response
+    {
+       return $this->redirectToRoute('tv_show_slug', ['slug' => $tvShow->getSlug()]);
+    }
+
+    /**
+     * @Route("/{slug}", name="tv_show_slug", methods={"GET"})
+     */
+    public function showslug(TvShow $tvShow): Response
     {
         return $this->render('tv_show/show.html.twig', [
             'tv_show' => $tvShow,
         ]);
+
     }
 
     /**

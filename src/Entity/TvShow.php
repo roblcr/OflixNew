@@ -69,6 +69,11 @@ class TvShow
      */
     private $persona;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->Season = new ArrayCollection();
@@ -219,6 +224,8 @@ class TvShow
         return $this;
     }
 
+    
+
     /**
      * @return Collection|Character[]
      */
@@ -239,6 +246,18 @@ class TvShow
     public function removePersona(Character $persona): self
     {
         $this->persona->removeElement($persona);
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
