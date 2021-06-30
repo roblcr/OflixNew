@@ -39,7 +39,7 @@ class TvShowController extends AbstractController
             $entityManager->persist($tvShow);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tv_show_index');
+            return $this->redirectToRoute('tv_show_list');
         }
 
         return $this->render('tv_show/new.html.twig', [
@@ -57,7 +57,7 @@ class TvShowController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="tv_show_slug", methods={"GET"})
+     * @Route("/details/{slug}", name="tv_show_slug", methods={"GET"})
      */
     public function showslug(TvShow $tvShow): Response
     {
@@ -78,7 +78,7 @@ class TvShowController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tv_show_index');
+            return $this->redirectToRoute('tv_show_list');
         }
 
         return $this->render('tv_show/edit.html.twig', [
@@ -98,6 +98,6 @@ class TvShowController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('tv_show_index');
+        return $this->redirectToRoute('tv_show_list');
     }
 }

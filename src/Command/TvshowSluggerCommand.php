@@ -32,23 +32,23 @@ class TvshowSluggerCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->addArgument('tvShowId', InputArgument::OPTIONAL, 'identifiant de la série')
+            ->addOption('updatedAt', null, InputOption::VALUE_NONE, 'mise a jour de la propriété updatedAt')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        // $arg1 = $input->getArgument('arg1');
+         $tvShowId = $input->getArgument('tvShowId');
 
-        // if ($arg1) {
-        //     $io->note(sprintf('You passed an argument: %s', $arg1));
-        // }
+         if ($tvShowId) {
+             $io->note(sprintf('You passed an argument: %s', $tvShowId));
+         }
 
-        // if ($input->getOption('option1')) {
-        //     // ...
-        // }
+         if ($input->getOption('option1')) {
+             // ...
+         }
 
         // 1) on va récupérer la ou les séries a mettre a jour
             
