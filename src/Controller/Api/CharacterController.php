@@ -2,8 +2,8 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Category;
-use App\Repository\CategoryRepository;
+use App\Entity\Character;
+use App\Repository\CharacterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,23 +12,23 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/api/v1/categories", name="api_categories_")
+ * @Route("/api/v1/character", name="api_character_")
  */
-class CategoryController extends AbstractController
+class CharacterController extends AbstractController
 {
     /**
      * Retourne toutes les séries du site
      *
-     * API : GET /api/v1/categories
+     * API : GET /api/v1/character
      *
      * @Route("", name="list", methods={"GET"})
      */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(CharacterRepository $characterRepository): Response
     {
-        $categories = $categoryRepository->findAll();
+        $character = $characterRepository->findAll();
 
         // Le serializer de Symfony n'ira chercher que des données
-        // taggées avec le group CATEGORIES
+        // taggées avec le group CHARACTER
         // Arguments de la méthode json
         // $data ==> Données à sérialiser (transformer en JSON)
         // int $status = 200    ==> Code HTTP (200, 201, ...401,403, 404...)
@@ -37,22 +37,22 @@ class CategoryController extends AbstractController
         // pour l'aider à gérer les cas ou il y a des relations
         // (un tvshow => character => tvshow => character ...Erreur ! Reference circulaire)
 
-        return $this->json($categories, 200, [], [
-            'groups' => 'categories'
+        return $this->json($character, 200, [], [
+            'groups' => 'characters'
         ]);
     }
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
      * 
-     * API : /api/v1/categories/{id}
+     * API : /api/v1/characters/{id}
      * 
-     * Retourne une category en fonction de son ID
+     * Retourne un character en fonction de son ID
      */
-    public function show(Category $category)
+    public function show(Character $character)
     {
-        return $this->json($category, 200, [], [
-            'groups' => 'categories'
+        return $this->json($character, 200, [], [
+            'groups' => 'characters'
         ]);
     }
 
@@ -62,7 +62,7 @@ class CategoryController extends AbstractController
      * 
      * @Route("", name="add", methods={"POST"})
      * 
-     * API : POST /api/v1/categories
+     * API : POST /api/v1/characters
      *
      * @return void
      */
@@ -76,12 +76,12 @@ class CategoryController extends AbstractController
         // JSON => OBJECT
         // La méthode deserialize va transformer les données JSON
         // en objet Category
-        $category = $serializer->deserialize($JsonData, Category::class, 'json');
+        $character = $serializer->deserialize($JsonData, Character::class, 'json');
 
         // On vérifie que tous les critères de validation de l'entité
         // TVShow sont respectés (Assert\NotBlank, ...)
         // https://symfony.com/doc/current/validation.html#using-the-validator-service
-        $errors = $validator->validate($category);
+        $errors = $validator->validate($character);
 
         if (count($errors) > 0) {
             // On a au moins une erreur détectée
@@ -96,13 +96,13 @@ class CategoryController extends AbstractController
             // On a pas d'erreur...on peut sauvegarder
             // On appelle manager pour sauvegarder
             $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
+            $em->persist($character);
             $em->flush();
 
             // On retourne une réponse clair au client (React, appli mobile, Insomnia, ..)
             return $this->json(
                 [
-                    'message' => 'La category ' . $category->getName() . ' a bien été créé'
+                    'message' => 'Le personnage ' . $character->getFirstname() . ' a bien été créé'
                 ],
                 201 // 201 - Created https://developer.mozilla.org/fr/docs/Web/HTTP/Status/201
             );

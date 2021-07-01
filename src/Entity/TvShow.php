@@ -23,7 +23,7 @@ class TvShow
 
     /**
      * @ORM\Column(type="string", length=255)
-       * @Groups({"tvshows"}), @Groups({"categories"})
+       * @Groups({"tvshows"}), @Groups({"categories"}), @Groups({"characters"})
 
      */
     private $title;

@@ -23,36 +23,37 @@ class Character
 
     /**
      * @ORM\Column(type="string", length=255)
-      * @Groups({"tvshows"})
+      * @Groups({"tvshows"}), @Groups({"characters"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-       * @Groups({"tvshows"})
+       * @Groups({"tvshows"}), @Groups({"characters"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
-      * @Groups({"tvshows"})
+      * @Groups({"tvshows"}), @Groups({"characters"})
      */
     private $gender;
 
     /**
      * @ORM\Column(type="string", length=255)
-       * @Groups({"tvshows"})
+       * @Groups({"tvshows"}), @Groups({"characters"})
      */
     private $bio;
 
     /**
      * @ORM\Column(type="smallint")
-       * @Groups({"tvshows"})
+       * @Groups({"tvshows"}), @Groups({"characters"})
      */
     private $age;
 
     /**
      * @ORM\ManyToMany(targetEntity=TvShow::class, mappedBy="persona")
+     * @Groups({"characters"})
      */
     private $tvShows;
 
