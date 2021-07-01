@@ -6,6 +6,7 @@ use App\Repository\TvShowRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TvShowRepository::class)
@@ -16,56 +17,64 @@ class TvShow
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"tvshows"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+       * @Groups({"tvshows"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+      * @Groups({"tvshows"})
      */
     private $synospis;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+       * @Groups({"tvshows"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+       * @Groups({"tvshows"})
      */
     private $nbLikes;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Season::class, mappedBy="tvShow")
+       * @Groups({"tvshows"})
      */
     private $Season;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="tvShows")
+       * @Groups({"tvshows"})
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity=Character::class, inversedBy="tvShows")
+     * @Groups({"tvshows"})
      */
     private $persona;
 
