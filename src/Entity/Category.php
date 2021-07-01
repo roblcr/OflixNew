@@ -6,6 +6,11 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
+
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -16,16 +21,21 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"categories"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"categories"})
+     * @Assert\NotBlank(message="Merci de saisir un nom pour la categorie")
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity=TvShow::class, mappedBy="category")
+     * @Groups({"categories"})
+     * 
      */
     private $tvShows;
 
